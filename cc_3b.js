@@ -68,3 +68,23 @@ orders.forEach(order => {
         console.log(`Order${order.orderId} failed: ${shortageMessage}`);
     }
 })
+
+let totalInventoryValue = inventory.reduce((total, product) => {
+    return total + product.price * product.stock;
+}, 0);
+
+console.log(`Total inventory value: $${totalInventoryValue.toFixed(2)}`);
+
+let lowStockItems = inventory.filter(product => product.stock <= 5);
+
+console.log("Low stock items");
+lowStockItems.forEach(item => {
+    console.log(`${item.name} (Stock: ${item.stock})`);
+});
+
+let priceList = inventory.map(product => {
+    return `${product.sku} - $${product.price.toFixed(2)}`;
+});
+
+console.log("Price List:");
+priceList.forEach(line => console.log(line));
